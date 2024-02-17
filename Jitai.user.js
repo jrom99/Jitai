@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Jitai
 // @description Displays your WaniKani reviews with randomized fonts
-// @version     3.0.0
+// @version     3.0.1
 // @author      @obskyr, edited by @marciska and @jrom99
 // @namespace   jrom99
 // @icon        https://raw.github.com/jrom99/Jitai/main/imgs/jitai.ico
@@ -12,7 +12,7 @@
 // @run-at      document-body
 // @grant       GM_addStyle
 // @grant       GM_getResourceText
-// @resource    fonts https://raw.github.com/jrom99/Jitai/main/fonts/fonts.json
+// @resource    fonts https://raw.github.com/jrom99/Jitai/main/fonts/fonts.json5
 // @require     https://unpkg.com/json5@2/dist/index.min.js
 
 // @license     MIT; http://opensource.org/licenses/MIT
