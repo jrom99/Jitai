@@ -15,5 +15,6 @@ It sets the font of the current review item (vocab, kanji, radical) automaticall
 ## Installation
 
 1. Make sure that you have **Tampermonkey** installed
-2. Click on the [`Jitai.user.js`] file
-3. Tampermonkey should recognize it as a userscript file and ask to install it
+2. Click on the [`Jitai.user.js`](Jitai.user.js) file
+3. Click on the "Raw" button
+4. Tampermonkey should recognize it as a userscript file and ask to install it
