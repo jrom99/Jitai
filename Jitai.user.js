@@ -24,8 +24,10 @@
 // TODO: check webfonts with github
 // TODO: use @font-face rules in .css with Wanikani's unicode-range
 // TODO: host Google webfonts on GitHub (if legal)
+// TODO: what about three state checkbutton/toggle for category and origin?
 // TODO: add font homepage icon
 // TODO: add homepage for all fonts
+// TODO: add setting to pair reading/meaning fonts
 
 ((global) => {
     'use strict';
@@ -35,6 +37,7 @@
     const scriptId = "jitai";
     const scriptName = "Jitai";
     const exampleSentence = '吾輩は猫である。名前はまだ無い';
+    const itemElementClass = "character-header__characters";
 
     let /** @type {HTMLElement} */ itemElement;
     let /** @type {string} */ defaultFont;
@@ -465,7 +468,7 @@
 
     /** Inserts CSS and sets event listeners */
     function setup() {
-        itemElement = /** @type {HTMLElement} */ (document.getElementsByClassName("character-header__characters")[0]);
+        itemElement = /** @type {HTMLElement} */ (document.getElementsByClassName(itemElementClass)[0]);
         defaultFont = getDefaultFont();
         itemElement.style.opacity = "0";
 
@@ -514,10 +517,10 @@
             }
 
             /* on mouse hovering, show default font */
-            .character-header__characters {
+            .${itemElementClass} {
                 font-family: var(--font-family-japanese);
             }
-            .character-header__characters:hover {
+            .${itemElementClass}:hover {
                 font-family: var(--font-family-japanese-hover);
             }
         `);
