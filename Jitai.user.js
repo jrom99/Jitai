@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name        Jitai
 // @description Displays your WaniKani reviews with randomized fonts
-// @version     3.0.1
+// @version     3.0.2
 // @author      @obskyr, edited by @marciska and @jrom99
 // @namespace   jrom99
 // @icon        https://raw.github.com/jrom99/Jitai/main/imgs/jitai.ico
@@ -9,7 +9,7 @@
 
 // @match       https://*.wanikani.com/subjects/review*
 // @match       https://*.wanikani.com/subjects/extra_study*
-// @run-at      document-body
+// @run-at      document-end
 // @grant       GM_addStyle
 // @grant       GM_getResourceText
 // @resource    fonts https://raw.github.com/jrom99/Jitai/main/fonts/fonts.json5
@@ -53,16 +53,18 @@
     class Font {
         /**
          * @param {Object} obj The font object
-         * @param {string} obj.selectorName
+         * @param {string | string[]} obj.familyNames
          * @param {string} [obj.displayName]
          * @param {boolean} [obj.recommended=false]
          * @param {FontCategory[]} [obj.categories]
          * @param {string | null} [obj.url]
          * @param {string | null} [obj.homepage]
          */
-        constructor({ selectorName, displayName, recommended = false, categories = [], url = null, homepage = null }) {
-            this.selectorName = selectorName;
-            this.displayName = displayName ?? selectorName;
+        constructor({ familyNames, displayName, recommended = false, categories = [], url = null, homepage = null }) {
+            const _familyNames = Array.isArray(familyNames)? familyNames : [familyNames];
+
+            this.familyName =  _familyNames.map((f) => `'${f}'`).join();
+            this.displayName = displayName ?? _familyNames[0];
             this.recommended = recommended;
             this.categories = Array.isArray(categories)? categories : [categories];
             this.url = url;
@@ -78,6 +80,7 @@
             // Will return false for the browser's default monospace font, sadly.
             const canvas = document.createElement('canvas');
             const context = canvas.getContext('2d');
+
             if (context === null) {
                 throw new Error("Unable to get canvas context")
             }
@@ -90,7 +93,7 @@
             // Microsoft Edge raises an error when a context's font is set to a string
             // containing certain special characters... so that needs to be handled.
             try {
-                context.font = `72px ${this.selectorName}, monospace`;
+                context.font = `72px ${this.familyName}, monospace`;
             } catch (e) {
                 return false;
             }
@@ -174,7 +177,7 @@
 
             context.textBaseline = 'top';
 
-            context.font = `24px ${this.selectorName}`;
+            context.font = `24px ${this.familyName}`;
 
             let result = true;
             for (let i = 0; i < glyphs.length; i++) {
@@ -286,7 +289,7 @@
                     content: {
                         sampletext: {
                             type: 'html',
-                            html: `<p class="font_example" style="font-family: ${font.selectorName}, ${defaultFont};">${exampleSentence}</p>`
+                            html: `<p class="font_example" style="font-family: ${font.familyName}, ${defaultFont};">${exampleSentence}</p>`
                         },
                         [`${uniqueValidHtmlId(font.displayName)}_useFont`]: {
                             type: 'checkbox',
@@ -443,16 +446,17 @@
         if (update) {
             const text = glyphs === undefined ? itemElement.innerText : glyphs;
             const canUse = fontPoolSelected.filter((f) => f.canRepresentGlyphs(text));
+            console.debug(`Usable fonts (${canUse.length}/${fontPoolSelected.length}) for "${text}": ${canUse.map((f) => `"${f.displayName}"`)}`);
 
             if (fontPoolSelected.length == 0) {
-                console.log(`${scriptName}: empty font pool!`)
+                console.warn(`${scriptName}: empty font pool!`)
                 randomizedFont = defaultFont;
             } else if (canUse.length === 0) {
-                console.log(`${scriptName}: no selected font can draw this text`);
+                console.warn(`${scriptName}: no selected font can draw this text.`);
                 randomizedFont = defaultFont;
             } else {
-                randomizedFont = canUse[Math.floor(Math.random() * canUse.length)].selectorName;
-                console.debug(`New random font: ${randomizedFont}`)
+                randomizedFont = canUse[Math.floor(Math.random() * canUse.length)].familyName;
+                console.info(`New random font: ${randomizedFont}`)
             }
         }
 
