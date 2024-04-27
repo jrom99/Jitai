@@ -1,9 +1,12 @@
 [
-    // familyName is a valid CSS property value, names are automatically quoted
+    // familyName: valid CSS property value, names are automatically quoted
     //   multiple values must be put in an array
-    // displayName (optional) is the name displayed in the settings dialog
+    // categories: array of "mincho" | "gothic" | "maru-gothic" | "brush" | "stylized" | "ud" | "antique"
+    // displayName (optional): alternative name to display in the settings dialog (defaults to the first family name)
+    // homepage (optional): url to know more about font (or where you can download it)
+    // url (optional): webfont install url
     { familyName: ["chifont+", "chifont"], displayName: "Chifont" },
-    { familyName: ["Mokomori Kuro Beta", "Mikiyu Font"], displayName: "Mokomori Kuro Beta" },
+    { familyName: ["Mokomori Kuro Beta", "Mikiyu Font"]},
     { familyName: "3Dkirieji04", displayName: "Kirieji 3D" },
     { familyName: "851CHIKARA-YOWAKU", displayName: "851 Chikara Yowaku" },
     { familyName: "A-OTF Gothic MB101 Pr6N", homepage: "https://fonts.adobe.com/fonts/a-otf-gothic-mb101-pr6n", categories: [ "gothic" ] },
@@ -454,9 +457,9 @@
     { familyName: "WanpakuRuika", homepage: "https://fonts.adobe.com/fonts/wanpakuruika", categories: [ "gothic" ] },
     { familyName: "Yomogi", homepage: "https://fonts.adobe.com/fonts/yomogi", categories: [ "maru-gothic" ], url: "https://fonts.googleapis.com/css?family=Yomogi&subset=japanese"},
     { familyName: "Yu Gothic Pr6N", homepage: "https://fonts.adobe.com/fonts/yu-gothic-pr6n", categories: [ "gothic" ] },
-    { familyName: ["Yu Gothic", "YuGothic"], displayName: "Yu Gothic",},
+    { familyName: ["Yu Gothic", "YuGothic"]},
     { familyName: "Yu Mincho Pr6N R", homepage: "https://fonts.adobe.com/fonts/yu-minchotai-pr6n-r", categories: [ "mincho" ] },
-    { familyName: ["Yu Mincho", "YuMincho"], displayName: "Yu Mincho",},
+    { familyName: ["Yu Mincho", "YuMincho"]},
     { familyName: "Yuji Boku", homepage: "https://fonts.adobe.com/fonts/yuji-boku", categories: [ "brush" ], url: "https://fonts.googleapis.com/css?family=Yuji+Boku&subset=japanese" },
     { familyName: "Yuji Mai", homepage: "https://fonts.adobe.com/fonts/yuji-mai", categories: [ "brush" ], url: "https://fonts.googleapis.com/css?family=Yuji+Mai&subset=japanese" },
     { familyName: "Yuji Syuku", homepage: "https://fonts.adobe.com/fonts/yuji-syuku", categories: [ "brush" ], url: "https://fonts.googleapis.com/css?family=Yuji+Syuku&subset=japanese" },
